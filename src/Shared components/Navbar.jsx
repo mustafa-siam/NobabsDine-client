@@ -4,7 +4,7 @@ import { NavLink } from 'react-router-dom';
 
 const Navbar = () => {
   const links=<>
-  <li><NavLink>All-Foods</NavLink></li>
+  <li><NavLink to={'/allfoods'}>All-Foods</NavLink></li>
   <li><NavLink>Gallary</NavLink></li>
   <li><NavLink>My Profile</NavLink></li>
   </>
@@ -13,7 +13,7 @@ const Navbar = () => {
   <div className="navbar-start ">
     <div className='w-18'><Lottie animationData={nobabjson}></Lottie></div>
     <h1 className="md:text-4xl text-2xl font-bold bg-gradient-to-r from-orange-500 to-lime-500 bg-clip-text text-transparent">    
-  NobabDine
+ <NavLink to={'/'}>NobabDine</NavLink> 
 </h1>
   </div>
   <div className="navbar-center hidden lg:flex">

@@ -2,6 +2,7 @@ import { motion } from "framer-motion";
 import burger from "../../assets/banner/burger.jpg";
 import pizza from "../../assets/banner/pizza.jpg";
 import meat from "../../assets/banner/meat-plate.jpg";
+import { NavLink } from "react-router-dom";
 
 const imageVariants = {
   hover: {
@@ -63,13 +64,15 @@ const Banner = () => {
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 3, delay:4 }}
             >
-              <motion.button
+                <NavLink to={'/allfoods'}>
+                <motion.button
                 className="relative px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-medium text-lg shadow-lg overflow-hidden group"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                 Order Now
               </motion.button>
+                </NavLink>
             </motion.div>
           </div>
 

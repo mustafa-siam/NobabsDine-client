@@ -4,6 +4,7 @@ import Topfood from './Topfood';
 import { FaArrowRight } from "react-icons/fa";
 import { motion } from 'framer-motion';
 import useAxiosSecure from '../../Hooks/UseAxiosSecure';
+import { NavLink } from 'react-router-dom';
 const Topfoods = () => {
     const [topfoods,settopfoods]=useState([]);
     const axiosinstance=useAxiosSecure()
@@ -24,15 +25,18 @@ const Topfoods = () => {
     topfoods.map(topfood=><Topfood key={topfood._id} topfood={topfood}></Topfood>)
 }
 
-            </div>    
+            </div>   
+
             <div className='flex justify-center items-center'>
-                 <motion.button
+                <NavLink to={'/allfoods'}>
+<motion.button
                 className="relative flex items-center px-8 py-3 bg-gradient-to-r from-amber-500 to-orange-600 text-white rounded-full font-medium text-xl shadow-lg overflow-hidden"
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
               >
                  <span>Explore Now</span>  <FaArrowRight className='pt-1 ml-10'></FaArrowRight>
               </motion.button>
+                </NavLink>
         </div>       
         </div>
     );
