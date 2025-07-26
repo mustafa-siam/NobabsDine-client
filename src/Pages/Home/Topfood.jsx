@@ -1,14 +1,15 @@
 import { hover, motion, scale } from "framer-motion";
+import { NavLink } from "react-router-dom";
 
 const Topfood = ({ topfood }) => {
-    const { name, image, category, price, quantity } = topfood;
+    const {_id, name, image, category, price, quantity } = topfood;
 
     return (
         <motion.div 
         whileHover={{scale:1.03}}
        transition={{type:'spring',stiffness:300}}
          className="card bg-white shadow-xl rounded-lg overflow-hidden">
-            <figure className="relative">
+            <figure>
                 <img
                     src={image}
                     alt={name}
@@ -30,7 +31,8 @@ const Topfood = ({ topfood }) => {
                     </p>
                 </div>
                 <div className="card-actions justify-end pt-3">
-                    <motion.button
+                    <NavLink to={`/detailfood/${_id}`}>
+<motion.button
                         whileHover="hover"
                         initial="initial"
                         variants={{
@@ -48,8 +50,9 @@ const Topfood = ({ topfood }) => {
                    className="absolute inset-0 bg-red-700 z-0"
                     />
                  <span className="relative z-10">View Details</span>
-</motion.button>
+               </motion.button>
 
+                    </NavLink>
                 </div>
             </div>
         </motion.div>
