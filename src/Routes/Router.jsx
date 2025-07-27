@@ -7,6 +7,10 @@ import Mainlayout from "../Layouts/Mainlayout";
 import Home from "../Layouts/Home";
 import Allfoods from "../Pages/Allfoods/Allfoods";
 import Fooddetails from "../Pages/Allfoods/Fooddetails";
+import Viewcart from "../Pages/Cartrelated/Viewcart";
+import Login from "../Accounts/Login";
+import Register from "../Accounts/Register";
+
 
 const router = createBrowserRouter([
   {
@@ -24,7 +28,19 @@ const router = createBrowserRouter([
   path:'/detailfood/:id',
   element:<Fooddetails></Fooddetails>,
   loader:({params})=>fetch(`http://localhost:5000/allcuisin/${params.id}`)
-}]
-  },
+},
+{
+  path:'/viewcart',
+  element:<Viewcart></Viewcart>
+},
+{
+  path:'/login',
+  element:<Login></Login>
+},
+{
+path:'/register',
+element:<Register></Register>
+}
+]},
 ]);
 export default router

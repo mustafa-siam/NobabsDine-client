@@ -1,8 +1,20 @@
 import Lottie from 'lottie-react';
 import nobabjson from '../assets/nobabsdine json/nobabsdine.json'
 import { NavLink } from 'react-router-dom';
-
+import { useContext } from 'react';
+import { authcontext } from '../Providers/Authprovider';
+import Swal from 'sweetalert2';
 const Navbar = () => {
+  const {user,logout}=useContext(authcontext)
+  const handlelogout=()=>{
+    logout()
+    .then(()=>{Swal.fire({
+                title: "LogOut Successfully",
+                icon: "success",
+                showConfirmButton:false,
+                timer:1000,
+                })})
+  }
   const links=<>
   <li><NavLink to={'/allfoods'}>All-Foods</NavLink></li>
   <li><NavLink>Gallary</NavLink></li>
@@ -22,7 +34,14 @@ const Navbar = () => {
     </ul>
   </div>
   <div className="navbar-end">
-    <a className="btn">Button</a>
+     <div className="hidden lg:flex gap-4">
+<button className="btn btn-link text-xl"><NavLink to={'/register'}>Register</NavLink></button>
+ {user ? 
+         <button  onClick={handlelogout} className="btn text-white bg-[#3c65f5] px-6 py-6 text-base hover:bg-[#212529]"><NavLink>Sign Out</NavLink></button>
+     : 
+      <button className="btn text-white bg-[#3c65f5] px-6 py-6 text-base hover:bg-[#212529]"><NavLink to={'/login'}>Sign In</NavLink></button>
+    }
+    </div>
     <div className="dropdown dropdown-end">
       <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
         <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5" fill="none" viewBox="0 0 24 24" stroke="currentColor"> <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M4 6h16M4 12h8m-8 6h16" /> </svg>
