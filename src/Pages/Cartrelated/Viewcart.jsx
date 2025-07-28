@@ -1,42 +1,76 @@
 import React from 'react';
+import useCarts from '../../Hooks/useCarts';
 
 const Viewcart = () => {
+  const carts=useCarts();
+  const estimatedtotal=carts.reduce((sum,item)=>sum+item.newtotalprice,0);
     return (
-       <div className="overflow-x-auto">
+      <div className='w-full flex lg:flex-row flex-col p-2 gap-12 items-start'>
+         <div className="overflow-x-auto lg:w-2/3">
   <table className="table">
     {/* head */}
     <thead className='bg-[#000] text-white text-lg'>
       <tr>
         <th>Product</th>
         <th>Details</th>
+        <th></th>
         <th>Total</th>
       </tr>
     </thead>
     <tbody>
-      {/* row 1 */}
-      <tr>
-        <th>1</th>
-        <td>Cy Ganderton</td>
-        <td>Quality Control Specialist</td>
-        <td>Blue</td>
-      </tr>
-      {/* row 2 */}
-      <tr className="hover:bg-base-300">
-        <th>2</th>
-        <td>Hart Hagerty</td>
-        <td>Desktop Support Technician</td>
-        <td>Purple</td>
-      </tr>
-      {/* row 3 */}
-      <tr>
-        <th>3</th>
-        <td>Brice Swyre</td>
-        <td>Tax Accountant</td>
-        <td>Red</td>
-      </tr>
+      {
+        carts.map(cart=><tr key={cart._id}>
+        <td className='flex flex-col md:flex-row text-center items-center gap-4'><img src={cart.image} className='w-28' />
+           <h2 className='text-lg text-[#E9004B]'>{cart.name}</h2></td>
+        <td className='text-lg '>${cart.price}</td>
+        <td className='text-lg font-medium flex gap-4 items-center'>
+           <input type="number" defaultValue={cart.inputqty}
+           className="px-4 py-3 text-lg border-2 border-gray-300 hover:border-orange-500 rounded-md w-20 "
+          />
+          <p className='text-base underline'>Remove item</p>
+        </td>
+        <td className='text-lg font-medium'>         
+          <p>{cart.newtotalprice}</p></td>
+      </tr>)
+      }
     </tbody>
   </table>
 </div>
+        <div className='lg:w-1/3 shadow-xl p-4 space-y-4'>
+             <h2 className='font-medium'>CART TOTALS</h2>
+             <hr />
+             <div className="bg-base-100 collapse collapse-arrow  border-base-300 border">
+  <input type="checkbox" className="peer" />
+  <div
+    className="collapse-title  text-[#54595F]"
+  >
+    Add cuopons
+  </div>
+  <div
+    className="collapse-content"
+  >
+   <div className="join w-full">
+    <input type="text" className="input join-item" placeholder="Enter Code" />
+    <button className="btn join-item text-white bg-[#e9004b]">Apply</button>
+  </div>
+  </div>
+</div>
+<hr />
+<div className='flex justify-between text-lg'>
+    <p>Free Shipping</p>
+    <p className='font-semibold'>Free</p>
+  </div>
+  <hr />
+  <div className='text-xl font-bold flex justify-between'>
+    
+    <p>Estimated Total</p>
+    <p>${estimatedtotal.toFixed(2)}</p>
+  </div>
+  <div>
+    <button className='btn w-full text-xl bg-[#e9004b] text-white hover:text-[#e9004b] hover:bg-white hover:border-red-600 my-4 py-6'>Confirm Purchase</button>
+  </div>
+        </div>
+      </div>
     );
 };
 

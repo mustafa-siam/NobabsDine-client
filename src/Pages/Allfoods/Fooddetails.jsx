@@ -1,11 +1,36 @@
-import { useState } from "react";
-import { useLoaderData, useOutletContext } from "react-router-dom";
-
+import { useContext, useState } from "react";
+import { useLoaderData} from "react-router-dom";
+import { authcontext } from "../../Providers/Authprovider";
+import useAxiosSecure from "../../Hooks/UseAxiosSecure";
+import Swal from "sweetalert2";
 const Fooddetails = () => {
     const food = useLoaderData();
     const { name, image, category, price, quantity, chef, origin, description } = food;
-    const {addtocart}=useOutletContext()
    const [inputqty,setinputqty]=useState(1);
+   const {user}=useContext(authcontext)
+   const axiosinstance=useAxiosSecure();
+   const handleaddtocart=async()=>{
+    const newtotalprice=inputqty*price;
+    const cartitem={
+        email:user.email,
+        image,
+        name,
+        price,
+        newtotalprice,
+        inputqty,
+        count:0,
+    }
+    console.log(cartitem)
+   const res=await axiosinstance.post('carts',cartitem)
+   if(res.data.insertedId){
+     Swal.fire({
+                             title: "Items Added In Cart",
+                             icon: "success",
+                             showConfirmButton:false,
+                             timer:2000
+                             })
+   }
+   }
     return (
         <div className="flex flex-col md:flex-row justify-center  gap-6 p-4 ">
             <div className="md:w-1/2">
@@ -35,7 +60,7 @@ const Fooddetails = () => {
     onChange={(e)=>setinputqty(parseInt(e.target.value) || 1)}
     className="px-4 py-3 text-lg border-2 border-gray-300 hover:border-orange-500 rounded-md w-40 "
   />
-                      <button onClick={()=>addtocart(inputqty,price)} className="btn bg-[#E9004B] text-white px-12 py-6 text-xl font-medium">
+                      <button onClick={handleaddtocart} className="btn bg-[#E9004B] text-white px-12 py-6 text-xl font-medium">
                                   Add to cart
                        </button>
             </div>
