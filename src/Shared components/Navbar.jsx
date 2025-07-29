@@ -4,10 +4,8 @@ import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { authcontext } from '../Providers/Authprovider';
 import Swal from 'sweetalert2';
-import { CartContext } from '../Cartproveider/Cartcontext';
 const Navbar = () => {
   const {user,logout}=useContext(authcontext)
-  const {fetchCarts}=useContext(CartContext)
   const handlelogout=()=>{
     logout()
     .then(()=>{Swal.fire({
@@ -20,7 +18,7 @@ const Navbar = () => {
   const links=<>
   <li><NavLink to={'/allfoods'}>All-Foods</NavLink></li>
   <li><NavLink>Gallary</NavLink></li>
-  <li><NavLink>My Profile</NavLink></li>
+  <li><NavLink to={'/addfood'}>Add Food</NavLink></li>
   </>
     return (
         <div className="navbar bg-base-100 shadow-sm">

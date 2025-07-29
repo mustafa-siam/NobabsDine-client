@@ -96,7 +96,7 @@ setcarts(remainingcarts)
     <p>${estimatedtotal.toFixed(2)}</p>
   </div>
   <div>
-    <button className='btn w-full text-xl bg-[#e9004b] text-white hover:text-[#e9004b] hover:bg-white hover:border-red-600 my-4 py-6'>Confirm Purchase</button>
+    <button className='btn w-full text-xl bg-[#e9004b] text-white hover:text-[#e9004b] hover:bg-white hover:border-red-600 my-4 py-6'>Proceed to Checkout</button>
   </div>
         </div>
       </div>

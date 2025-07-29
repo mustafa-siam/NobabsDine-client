@@ -11,6 +11,7 @@ import Viewcart from "../Pages/Cartrelated/Viewcart";
 import Login from "../Accounts/Login";
 import Register from "../Accounts/Register";
 import Privateroute from "../Privateroutes/Privateroute";
+import Addfoods from "../Pages/Allfoods/Addfoods";
 
 
 const router = createBrowserRouter([
@@ -41,6 +42,10 @@ const router = createBrowserRouter([
 {
 path:'/register',
 element:<Register></Register>
+},
+{
+  path:'/addfood',
+  element:<Addfoods></Addfoods>
 }
 ]},
 ]);
