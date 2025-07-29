@@ -3,7 +3,9 @@ import { useLoaderData} from "react-router-dom";
 import { authcontext } from "../../Providers/Authprovider";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
+import { CartContext } from "../../Cartproveider/Cartcontext";
 const Fooddetails = () => {
+    const {fetchCarts}=useContext(CartContext)
     const food = useLoaderData();
     const { name, image, category, price, quantity, chef, origin, description } = food;
    const [inputqty,setinputqty]=useState(1);
@@ -29,6 +31,7 @@ const Fooddetails = () => {
                              showConfirmButton:false,
                              timer:2000
                              })
+fetchCarts();
    }
    }
     return (

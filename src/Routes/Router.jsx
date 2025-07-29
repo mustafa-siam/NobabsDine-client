@@ -10,6 +10,7 @@ import Fooddetails from "../Pages/Allfoods/Fooddetails";
 import Viewcart from "../Pages/Cartrelated/Viewcart";
 import Login from "../Accounts/Login";
 import Register from "../Accounts/Register";
+import Privateroute from "../Privateroutes/Privateroute";
 
 
 const router = createBrowserRouter([
@@ -26,12 +27,12 @@ const router = createBrowserRouter([
   },
 {
   path:'/detailfood/:id',
-  element:<Fooddetails></Fooddetails>,
+  element:<Privateroute><Fooddetails></Fooddetails></Privateroute>,
   loader:({params})=>fetch(`http://localhost:5000/allcuisin/${params.id}`)
 },
 {
   path:'/viewcart',
-  element:<Viewcart></Viewcart>
+  element:<Privateroute><Viewcart></Viewcart></Privateroute> 
 },
 {
   path:'/login',

@@ -1,9 +1,38 @@
-import React from 'react';
-import useCarts from '../../Hooks/useCarts';
-
+import React, { useContext } from 'react';
+import useAxiosSecure from '../../Hooks/UseAxiosSecure';
+import Swal from 'sweetalert2';
+import { CartContext } from '../../Cartproveider/Cartcontext';
 const Viewcart = () => {
-  const carts=useCarts();
+   const { carts, fetchCarts,setcarts } = useContext(CartContext)
   const estimatedtotal=carts.reduce((sum,item)=>sum+item.newtotalprice,0);
+  const axiosinstance=useAxiosSecure()
+  const handledelete=(id)=>{
+    Swal.fire({
+  title: "Are you sure?",
+  text: "You won't be able to revert this!",
+  icon: "warning",
+  showCancelButton: true,
+  confirmButtonColor: "#3085d6",
+  cancelButtonColor: "#d33",
+  confirmButtonText: "Yes, delete it!"
+}).then(async(result) => {
+  if (result.isConfirmed) {
+   const res=await  axiosinstance.delete(`carts/${id}`)
+   if(res.data.deletedCount>0){
+Swal.fire({
+      title: "Deleted!",
+      text: "Your item has been deleted.",
+      icon: "success"
+    });
+    fetchCarts();
+    const remainingcarts=carts.filter(cart=>cart._id!==id);
+setcarts(remainingcarts)
+   }
+   
+  }
+});
+     
+  }
     return (
       <div className='w-full flex lg:flex-row flex-col p-2 gap-12 items-start'>
          <div className="overflow-x-auto lg:w-2/3">
@@ -23,11 +52,11 @@ const Viewcart = () => {
         <td className='flex flex-col md:flex-row text-center items-center gap-4'><img src={cart.image} className='w-28' />
            <h2 className='text-lg text-[#E9004B]'>{cart.name}</h2></td>
         <td className='text-lg '>${cart.price}</td>
-        <td className='text-lg font-medium flex gap-4 items-center'>
+        <td className='text-lg font-medium  items-center'>
            <input type="number" defaultValue={cart.inputqty}
            className="px-4 py-3 text-lg border-2 border-gray-300 hover:border-orange-500 rounded-md w-20 "
           />
-          <p className='text-base underline'>Remove item</p>
+          <button onClick={()=>handledelete(cart._id)} className='text-base pl-4 underline hover:cursor-pointer'>Remove item</button>
         </td>
         <td className='text-lg font-medium'>         
           <p>{cart.newtotalprice}</p></td>

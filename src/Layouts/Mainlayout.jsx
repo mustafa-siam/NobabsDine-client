@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import Navbar from '../Shared components/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../Shared components/Footer';
 import { FaShoppingBag } from "react-icons/fa";
-import useCarts from '../Hooks/useCarts';
+import { CartContext } from '../Cartproveider/Cartcontext';
 const Mainlayout = () => {
-    const carts=useCarts()
+    const {carts}=useContext(CartContext)
+   
     const estimatedtotal=carts.reduce((sum,item)=>sum+item.newtotalprice,0)
     return (
         <div className='max-w-7xl mx-auto space-y-16'>

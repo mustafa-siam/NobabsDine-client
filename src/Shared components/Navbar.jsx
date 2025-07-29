@@ -4,8 +4,10 @@ import { NavLink } from 'react-router-dom';
 import { useContext } from 'react';
 import { authcontext } from '../Providers/Authprovider';
 import Swal from 'sweetalert2';
+import { CartContext } from '../Cartproveider/Cartcontext';
 const Navbar = () => {
   const {user,logout}=useContext(authcontext)
+  const {fetchCarts}=useContext(CartContext)
   const handlelogout=()=>{
     logout()
     .then(()=>{Swal.fire({
