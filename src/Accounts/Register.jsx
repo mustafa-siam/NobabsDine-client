@@ -6,9 +6,9 @@ import Swal from "sweetalert2";
 import { authcontext } from "../Providers/Authprovider";
 
 const Register = () => {
-    const { creatuser} = useContext(authcontext);
+    const { creatuser,userprofile} = useContext(authcontext);
     const navigate=useNavigate()
-    const handleregister=(e)=>{
+    const handleregister=async(e)=>{
 e.preventDefault();
         const form = e.target;
         const name = form.name.value;
@@ -18,16 +18,17 @@ e.preventDefault();
         const registeruser = { name, photourl, email, password };
         console.log(registeruser)
         creatuser(email,password)
-        .then(result=>{
+        .then((result)=>{
+            userprofile(name,photourl)
             console.log(result.user)        
              Swal.fire({
           title: "Registration Successful",
           icon: "success",
           showConfirmButton: false,
-          timer: 1500,
+          timer: 2000,
         });
          form.reset();
-      setTimeout(() => navigate("/"), 1500);
+    //   setTimeout(() => navigate("/"), 1500);
         })
         .catch(error=>{
             console.error(error)

@@ -12,6 +12,8 @@ import Login from "../Accounts/Login";
 import Register from "../Accounts/Register";
 import Privateroute from "../Privateroutes/Privateroute";
 import Addfoods from "../Pages/Allfoods/Addfoods";
+import Purchase from "../Pages/Cartrelated/Purchase";
+import Myfoods from "../Pages/Myfoods/Myfoods";
 
 
 const router = createBrowserRouter([
@@ -46,6 +48,14 @@ element:<Register></Register>
 {
   path:'/addfood',
   element:<Addfoods></Addfoods>
+},
+{
+  path:'/purchase',
+  element:<Purchase></Purchase>
+},
+{
+  path:'/myfoods',
+  element:<Myfoods></Myfoods>
 }
 ]},
 ]);

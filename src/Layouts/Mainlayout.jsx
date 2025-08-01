@@ -7,7 +7,7 @@ import { CartContext } from '../Cartproveider/Cartcontext';
 const Mainlayout = () => {
     const {carts}=useContext(CartContext)
    
-    const estimatedtotal=carts.reduce((sum,item)=>sum+item.newtotalprice,0)
+    const estimatedtotal=carts.reduce((sum,item)=>sum+parseFloat(item.newtotalprice) ,0)
     return (
         <div className='max-w-7xl mx-auto space-y-16'>
             <NavLink to={'/viewcart'}>
