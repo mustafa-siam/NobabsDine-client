@@ -14,6 +14,8 @@ import Privateroute from "../Privateroutes/Privateroute";
 import Addfoods from "../Pages/Allfoods/Addfoods";
 import Purchase from "../Pages/Cartrelated/Purchase";
 import Myfoods from "../Pages/Myfoods/Myfoods";
+import Updatefood from "../Pages/Myfoods/Updatefood";
+import Foodgallery from "../Pages/Foodgallery/Foodgallery";
 
 
 const router = createBrowserRouter([
@@ -56,6 +58,15 @@ element:<Register></Register>
 {
   path:'/myfoods',
   element:<Myfoods></Myfoods>
+},
+{
+  path:'/updatefood/:id',
+  element:<Updatefood></Updatefood>,
+   loader:({params})=>fetch(`http://localhost:5000/allcuisin/${params.id}`)
+},
+{
+  path:'/foodgallery',
+  element:<Foodgallery></Foodgallery>
 }
 ]},
 ]);

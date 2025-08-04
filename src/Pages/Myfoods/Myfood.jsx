@@ -59,7 +59,7 @@ const handledeletefood=(id)=>{
                     <p className='text-2xl cursor-pointer' onClick={()=>handledeletefood(_id)}><RiDeleteBinFill /></p>
                 </div>
                 <div className="card-actions justify-between items-center pt-3">
-                    <Link><button className='text-red-700 font-bold text-lg py-2 px-4 border border-red-700 rounded-lg cursor-pointer hover:text-red-300'>Update</button></Link>
+                    <Link to={`/updatefood/${_id}`}><button className='text-red-700 font-bold text-lg py-2 px-4 border border-red-700 rounded-lg cursor-pointer hover:text-red-300'>Update</button></Link>
                     <NavLink to={`/detailfood/${_id}`}>
 <motion.button
                         whileHover="hover"
