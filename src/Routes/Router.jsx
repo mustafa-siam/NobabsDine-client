@@ -16,6 +16,8 @@ import Purchase from "../Pages/Cartrelated/Purchase";
 import Myfoods from "../Pages/Myfoods/Myfoods";
 import Updatefood from "../Pages/Myfoods/Updatefood";
 import Foodgallery from "../Pages/Foodgallery/Foodgallery";
+import Userprofile from "../Pages/Userprofile/Userprofile";
+import Editprofile from "../Pages/Userprofile/Editprofile";
 
 
 const router = createBrowserRouter([
@@ -49,15 +51,15 @@ element:<Register></Register>
 },
 {
   path:'/addfood',
-  element:<Addfoods></Addfoods>
+  element:<Privateroute><Addfoods></Addfoods></Privateroute> 
 },
 {
   path:'/purchase',
-  element:<Purchase></Purchase>
+  element:<Privateroute><Purchase></Purchase></Privateroute> 
 },
 {
   path:'/myfoods',
-  element:<Myfoods></Myfoods>
+  element:<Privateroute><Myfoods></Myfoods></Privateroute> 
 },
 {
   path:'/updatefood/:id',
@@ -67,6 +69,14 @@ element:<Register></Register>
 {
   path:'/foodgallery',
   element:<Foodgallery></Foodgallery>
+},
+{
+  path:'/userprofile',
+  element:<Userprofile></Userprofile>
+},
+{
+  path:'/editprofile',
+  element:<Editprofile></Editprofile>
 }
 ]},
 ]);

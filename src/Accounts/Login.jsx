@@ -1,5 +1,5 @@
 import  { useContext } from 'react';
-import { Link, useNavigate } from 'react-router-dom';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import signinlottie from '../assets/signin/signin.json'
 import Lottie from 'lottie-react';
@@ -7,6 +7,7 @@ import { authcontext } from '../Providers/Authprovider';
 const Login = () => {
      const {login}=useContext(authcontext)
   const navigate=useNavigate();
+  const location=useLocation()
     const handlelogin=(e)=>{
           e.preventDefault();
            const form=e.target;
@@ -22,7 +23,7 @@ const Login = () => {
                          showConfirmButton:false,
                          timer:1000
                          })
-             setTimeout(() =>navigate('/'), 2000);
+             setTimeout(() =>navigate(location?.state ? location.state : '/'), 2000);
         })
         .catch(error=>{
           console.error(error)

@@ -28,7 +28,7 @@ e.preventDefault();
           timer: 2000,
         });
          form.reset();
-    //   setTimeout(() => navigate("/"), 1500);
+       setTimeout(() => navigate("/"), 1500);
         })
         .catch(error=>{
             console.error(error)

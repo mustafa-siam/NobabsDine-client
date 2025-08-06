@@ -21,10 +21,10 @@ const Navbar = () => {
   };
 
   const links = <>
-    <li><NavLink to="/allfoods">All-Foods</NavLink></li>
-    <li><NavLink to={'/foodgallery'}>Food Gallery</NavLink></li>
-    <li><NavLink to="/addfood">Add Food</NavLink></li>
-    <li><NavLink to="/myfoods">My Added food</NavLink></li>
+   <li className='text-base hover:border-b-4 border-orange-600'><NavLink to="/">Home</NavLink></li>
+    <li className='text-base hover:border-b-4 border-orange-600'><NavLink to="/allfoods">All-Foods</NavLink></li>
+    <li className='text-base hover:border-b-4 border-orange-600'><NavLink to={'/foodgallery'}>Food Gallery</NavLink></li>
+   
   </>;
 
   return (
@@ -37,7 +37,7 @@ const Navbar = () => {
       </div>
 
       <div className="navbar-center hidden lg:flex">
-        <ul className="menu menu-horizontal px-1 gap-2">{links}</ul>
+        <ul className=" flex items-center justify-center px-1 gap-6">{links}</ul>
       </div>
 
       <div className="navbar-end flex items-center md:gap-4 gap-1">
@@ -51,7 +51,7 @@ const Navbar = () => {
 
         {user && (
           <div className="dropdown dropdown-end cursor-pointer">
-            <div  tabIndex={0} role="button" className="avatar">
+            <div  tabIndex={0} role="button" className="avatar tooltip tooltip-bottom"  data-tip={user?.displayName || 'No Name'}>
   <div className="ring-primary ring-offset-base-100 w-14 rounded-full ring-2 ring-offset-2">
     {user.photoURL ? (
                   <img src={user.photoURL} alt="user" />
@@ -61,9 +61,10 @@ const Navbar = () => {
   </div>
 </div>
             <ul tabIndex={0} className="mt-3 z-[1] p-3 shadow menu menu-sm dropdown-content bg-base-100 rounded-box w-48 space-y-2">
-              <li><Link to="/myfoods" className="text-base font-medium">My Added food</Link></li>
-              <li><Link to={'/addfood'} className="text-base font-medium">Add a food item</Link></li>
-              <li><Link to="/purchase" className="text-base font-medium">My Orderd food</Link></li>
+              <li><Link to="/myfoods" className="text-base font-medium hover:border-b-4 border-orange-600">My Added food</Link></li>
+              <li><Link to={'/addfood'} className="text-base font-medium hover:border-b-4 border-orange-600">Add a food item</Link></li>
+              <li><Link to="/purchase" className="text-base font-medium hover:border-b-4 border-orange-600">My Orderd food</Link></li>
+              <li><Link to="/userprofile" className="text-base font-medium hover:border-b-4 border-orange-600">My Profile</Link></li>
               <li><button onClick={handlelogout} className="btn bg-[#3c65f5] text-white hover:bg-[#212529]">Sign Out</button></li>
             </ul>
           </div>
