@@ -13,6 +13,7 @@ import lgZoom from 'lightgallery/plugins/zoom';
 import lgAutoplay from 'lightgallery/plugins/autoplay'
 import lgFullscreen from 'lightgallery/plugins/fullscreen'
 import lgRotate from 'lightgallery/plugins/rotate'
+import { Helmet } from "react-helmet";
 const Foodgallery = () => {
    const onInit = () => {
         console.log('lightGallery has been initialized');
@@ -29,6 +30,9 @@ const Foodgallery = () => {
 
   return (
     <>
+    <Helmet>
+      <title>Food Gallery | Nobabdine</title>
+    </Helmet>
  <div className="columns-1 gap-2 md:columns-2 lg:columns-3  p-4">
             <LightGallery
                 onInit={onInit}

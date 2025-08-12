@@ -2,6 +2,7 @@ import React, { useContext, useState } from 'react';
 import useAxiosSecure from '../../Hooks/UseAxiosSecure';
 import { authcontext } from '../../Providers/Authprovider';
 import { useLoaderData, useNavigate } from 'react-router-dom';
+import { Helmet } from 'react-helmet-async';
 import Swal from 'sweetalert2';
 const Updatefood = () => {
   const { user } = useContext(authcontext);
@@ -50,6 +51,9 @@ const Updatefood = () => {
 
   return (
     <div className="max-w-3xl mx-auto p-4 space-y-6from-[#fff0e5] via-[#c79fd6] to-[#f3aaaa] rounded-lg shadow-lg">
+       <Helmet>
+              <title>Update Food | Nobabdine</title>
+            </Helmet>
       <h1 className="text-4xl font-bold text-center pb-3 text-[#6c2a8c]">Share a Culinary Masterpiece</h1>
       <p className="text-center text-gray-600 font-medium pb-10">Fill in the details below to add a new food item to NobabDine.</p>
 

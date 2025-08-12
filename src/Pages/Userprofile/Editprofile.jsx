@@ -1,5 +1,5 @@
 import React, { useContext } from 'react';
-
+import { Helmet } from 'react-helmet-async';
 import { useNavigate } from 'react-router-dom';
 import Swal from 'sweetalert2';
 import { authcontext } from '../../Providers/Authprovider';
@@ -26,6 +26,9 @@ const Editprofile = () => {
     }
     return (
         <div>
+             <Helmet>
+                    <title>Edit profile | Nobabdine</title>
+                  </Helmet>
             <div className="flex justify-center h-screen items-center ">
                   <form onSubmit={handleupdateProfile} className="md:w-3/4 lg:w-1/2 w-3/4 mx-auto  shadow-2xl p-6">
       <fieldset className="fieldset">

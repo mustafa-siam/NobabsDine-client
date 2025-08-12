@@ -1,3 +1,7 @@
+import { RouterProvider } from "react-router-dom"
+import CartProvider from "./Cartproveider/Cartcontext"
+import Authprovider from "./Providers/Authprovider"
+import router from "./Routes/Router"
 
 
 
@@ -5,11 +9,11 @@ function App() {
   
 
   return (
-    <>
-     
-      <h1 className='text-4xl text-amber-700'>Vite + React</h1>
-     
-    </>
+   <Authprovider>
+    <CartProvider>
+      <RouterProvider router={router}></RouterProvider>
+    </CartProvider>
+   </Authprovider>
   )
 }
 

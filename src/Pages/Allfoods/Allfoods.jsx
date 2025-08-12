@@ -3,7 +3,7 @@ import useAxiosSecure from '../../Hooks/UseAxiosSecure';
 import Topfood from '../Home/Topfood';
 import Pagination from '@mui/material/Pagination';
 import PaginationItem from '@mui/material/PaginationItem';
-
+import { Helmet } from 'react-helmet-async';
 const Allfoods = () => {
   const [allfoods, setallfoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
@@ -24,6 +24,9 @@ const Allfoods = () => {
 
   return (
     <>
+     <Helmet>
+            <title>All Foods | Nobabdine</title>
+          </Helmet>
       <div className='flex justify-end pr-2'>
         <label className="input flex items-center gap-2">
           <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">

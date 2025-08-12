@@ -2,7 +2,7 @@ import React, { useContext, useEffect, useState } from 'react';
 import useAxiosSecure from '../../Hooks/UseAxiosSecure';
 import { authcontext } from '../../Providers/Authprovider';
 import Myfood from './Myfood';
-
+import { Helmet } from 'react-helmet-async';
 const Myfoods = () => {
    const [allfoods,setallfoods]=useState([])
    const {user}=useContext(authcontext)
@@ -15,6 +15,9 @@ const Myfoods = () => {
        },[axiosinstance,user?.email])
        return (
            <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2'>
+            <Helmet>
+                    <title>My Food | Nobabdine</title>
+                  </Helmet>
                {
                     allfoods.map(topfood=><Myfood key={topfood._id} topfood={topfood} allfoods={allfoods} setallfoods={setallfoods}></Myfood>)
                }

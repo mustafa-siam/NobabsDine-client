@@ -3,7 +3,7 @@ import axios from 'axios';
 import Swal from 'sweetalert2';
 import { authcontext } from '../../Providers/Authprovider';
 import useAxiosSecure from '../../Hooks/UseAxiosSecure';
-
+import { Helmet } from 'react-helmet-async';
 const Addfoods = () => {
   const { user } = useContext(authcontext);
 const axiosinstance=useAxiosSecure()
@@ -55,6 +55,9 @@ const axiosinstance=useAxiosSecure()
 
   return (
     <div className="max-w-3xl mx-auto p-4 space-y-6from-[#fff0e5] via-[#c79fd6] to-[#f3aaaa] rounded-lg shadow-lg">
+      <Helmet>
+        <title>Add Food | Nobabdine</title>
+      </Helmet>
         <h1 className="text-4xl font-bold text-center pb-3 text-[#6c2a8c]">Share a Culinary Masterpiece</h1>
       <p className="text-center text-gray-600 font-medium pb-10">Fill in the details below to add a new food item to NobabDine.</p>
 
@@ -114,6 +117,7 @@ const axiosinstance=useAxiosSecure()
 
         <input type="submit" value="Add Item" className="btn btn-block bg-[#6c2a8c] hover:bg-[#6c2a8c]/80 text-white md:col-span-2" />
       </form>
+      
     </div>
   );
 };

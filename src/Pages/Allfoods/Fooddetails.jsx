@@ -4,7 +4,7 @@ import { authcontext } from "../../Providers/Authprovider";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { CartContext } from "../../Cartproveider/Cartcontext";
-
+import { Helmet } from "react-helmet";
 const Fooddetails = () => {
     const { fetchCarts } = useContext(CartContext);
     const food = useLoaderData();
@@ -51,6 +51,9 @@ const Fooddetails = () => {
 
     return (
         <div className="flex flex-col md:flex-row justify-center gap-6 p-4">
+             <Helmet>
+                    <title>Food details | Nobabdine</title>
+                  </Helmet>
             <div className="md:w-1/2">
                 <img src={image} alt={name} className="w-full h-[400px] rounded-md shadow-md" />
                 <h2 className="text-3xl font-bold pt-5 text-[#f97316]">{name}</h2>
