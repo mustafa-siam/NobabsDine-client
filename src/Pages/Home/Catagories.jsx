@@ -10,7 +10,7 @@ import { Autoplay} from 'swiper/modules';
 
 const Catagories = () => {
   return (
-    <div>
+    <div className='p-2'>
       <div className='text-center space-y-4'>
         <h1 className='text-[#05264e] md:text-5xl text-3xl font-bold'>Our Categories</h1>
         <p className='md:text-xl text-base text-gray-600'>
@@ -22,7 +22,6 @@ const Catagories = () => {
 
       <div className='py-12'>
         <Swiper
-          slidesPerView={3}
           spaceBetween={30}
           loop={true}
           autoplay={{
@@ -32,6 +31,19 @@ const Catagories = () => {
           pagination={{
             clickable: true,
           }}
+          breakpoints={
+            {
+              0:{
+                slidesPerView:1,
+              },
+              768:{
+                slidesPerView:2,
+              },
+              1024:{
+                slidesPerView:3
+              }
+            }
+          }
           modules={[Autoplay]}
           className="mySwiper"
         >

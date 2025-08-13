@@ -10,17 +10,24 @@ const useAxiosInterceptor = () => {
 
   useEffect(() => {
     const interceptor = axiosSecure.interceptors.response.use(
-      (res) => res,
+      (response) => {
+        return response;
+      },
       (error) => {
         if (error.response?.status === 401 || error.response?.status === 403) {
           logout()
-            .then(() => navigate("/login"))
+            .then(() => {
+              navigate("/login");
+            })
             .catch(console.error);
         }
         return Promise.reject(error);
       }
     );
-    return () => axiosSecure.interceptors.response.eject(interceptor);
+
+    return () => {
+      axiosSecure.interceptors.response.eject(interceptor);
+    };
   }, [axiosSecure, logout, navigate]);
 };
 

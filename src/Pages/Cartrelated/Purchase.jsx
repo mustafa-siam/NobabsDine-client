@@ -37,7 +37,7 @@ const Purchase = () => {
                         <tbody>
                             {orders.flatMap(order => order.items.map(item => (
                                 <tr  key={`${order._id}-${item._id}`}>
-                                    <td className='flex items-center gap-4'>
+                                    <td className='flex flex-col md:flex-row text-center items-center gap-4'>
                                         <img src={item.image} className='w-20 h-20 object-cover rounded-lg' alt={item.name} />
                                         <h2 className='text-lg text-[#E9004B]'>{item.name}</h2>
                                     </td>

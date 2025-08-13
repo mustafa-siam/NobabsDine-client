@@ -66,7 +66,7 @@ const Viewcart = () => {
   };
 
   return (
-    <div className='w-full flex lg:flex-row flex-col p-2 gap-12 items-start'>
+    <div className='w-full flex lg:flex-row flex-col p-2 gap-12 items-center'>
       <div className="overflow-x-auto lg:w-2/3">
         <table className="table">
           <thead className='bg-[#000] text-white text-lg'>
@@ -83,7 +83,7 @@ const Viewcart = () => {
                 <td className='flex flex-col md:flex-row text-center items-center gap-4'><img src={cart.image} className='w-28' alt={cart.name} />
                   <h2 className='text-lg text-[#E9004B]'>{cart.name}</h2></td>
                 <td className='text-lg '>${cart.price}</td>
-                <td className='text-lg font-medium items-center'>
+                <td className='text-lg font-medium flex flex-col items-center'>
                   <input type="number" readOnly defaultValue={cart.inputqty}
                     className="px-4 py-3 text-lg border-2 border-gray-300 hover:border-orange-500 rounded-md w-20 "
                   />
@@ -126,9 +126,17 @@ const Viewcart = () => {
           <p>Estimated Total</p>
           <p>${estimatedtotal.toFixed(2)}</p>
         </div>
-        <div>
-          <button onClick={handlePlaceOrder} className='btn w-full text-xl bg-[#e9004b] text-white hover:text-[#e9004b] hover:bg-white hover:border-red-600 my-4 py-6'>Place the Order</button>
-        </div>
+        <button
+  onClick={handlePlaceOrder}
+  disabled={carts.length < 1}
+  className={`btn w-full text-xl my-4 py-6 
+    ${carts.length < 1 
+      ? 'bg-gray-400 cursor-not-allowed text-gray-700' 
+      : 'bg-[#e9004b] text-white hover:text-[#e9004b] hover:bg-white hover:border-red-600'}`}
+>
+  Place the Order
+</button>
+
       </div>
     </div>
   );

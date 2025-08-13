@@ -10,7 +10,7 @@ import { EffectCreative, Pagination  } from 'swiper/modules';
 
 const Review = () => {
   return (
-    <div>
+    <div className='p-3'>
       <div className='text-center space-y-4'>
         <h1 className='text-[#05264e] md:text-5xl text-3xl font-bold'>Clients About Us</h1>
         <p className='md:text-xl text-base text-gray-600'>
