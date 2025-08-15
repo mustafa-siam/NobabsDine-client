@@ -1,4 +1,4 @@
-import { createUserWithEmailAndPassword, onAuthStateChanged, signInWithEmailAndPassword, signOut, updateProfile } from 'firebase/auth';
+import { createUserWithEmailAndPassword, GithubAuthProvider, GoogleAuthProvider, onAuthStateChanged, signInWithEmailAndPassword, signInWithPopup, signOut, updateProfile } from 'firebase/auth';
 import React, { createContext, useEffect, useState } from 'react';
 import auth from '../Firebase/firebase.config';
 import axios from 'axios';
@@ -8,7 +8,8 @@ export const authcontext = createContext();
 const Authprovider = ({ children }) => {
     const [user, setuser] = useState(null);
     const [loading, setloading] = useState(true);
-
+    const googleprovider = new GoogleAuthProvider();
+    const githubprovider = new GithubAuthProvider();
     const creatuser = (email, password) => {
         setloading(true);
         return createUserWithEmailAndPassword(auth, email, password);
@@ -37,13 +38,13 @@ const Authprovider = ({ children }) => {
         const unsubscribe = onAuthStateChanged(auth, (currentuser) => {
             setuser(currentuser);
             if (currentuser?.email) {
-                axios.post('http://localhost:5000/jwt', { email: currentuser.email }, { withCredentials: true })
+                axios.post('https://nobabs-dine-server.vercel.app/jwt', { email: currentuser.email }, { withCredentials: true })
                     .then((res) => {
                         console.log('login', res.data);
                         setloading(false);
                     });
             } else {
-                axios.post('http://localhost:5000/logout', {}, { withCredentials: true })
+                axios.post('https://nobabs-dine-server.vercel.app/logout', {}, { withCredentials: true })
                     .then((res) => {
                         console.log('logout', res.data);
                         setloading(false);
@@ -52,7 +53,14 @@ const Authprovider = ({ children }) => {
         });
         return () => unsubscribe();
     }, []);
-
+const loginwithgoogle=()=>{
+        setloading(true)
+        return signInWithPopup(auth,googleprovider)
+    }
+    const loginwithgithub=()=>{
+        setloading(true);
+        return signInWithPopup(auth, githubprovider)
+    }
     const authinfo = {
         creatuser,
         login,
@@ -60,6 +68,8 @@ const Authprovider = ({ children }) => {
         user,
         loading,
         userprofile,
+        loginwithgoogle,
+        loginwithgithub,
     };
 
     return (

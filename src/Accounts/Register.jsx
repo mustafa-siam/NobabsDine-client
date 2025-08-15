@@ -1,11 +1,14 @@
 import Lottie from "lottie-react";
 import { Link, useNavigate } from "react-router-dom";
 import registerlottie from '../assets/register/register.json'
-import { useContext } from "react";
+import { useContext, useState } from "react";
 import Swal from "sweetalert2";
 import { authcontext } from "../Providers/Authprovider";
-
+import { IoEye } from "react-icons/io5";
+import { IoEyeOff } from "react-icons/io5";
 const Register = () => {
+    const [passerror, setpasserror] = useState('');
+     const [showpass,setshowpass]=useState(false);
     const { creatuser,userprofile} = useContext(authcontext);
     const navigate=useNavigate()
     const handleregister=async(e)=>{
@@ -16,6 +19,15 @@ e.preventDefault();
         const email = form.email.value;
         const password = form.password.value;
         const registeruser = { name, photourl, email, password };
+         const regex = /^(?=.*[a-z])(?=.*[A-Z]).{6,}$/;
+
+        if (!regex.test(password)) {
+            setpasserror("Password must have an uppercase, lowercase, and at least 6 characters.");
+            setTimeout(() => {
+                setpasserror("")
+            }, 5000);
+            return;
+        }
         console.log(registeruser)
         creatuser(email,password)
         .then((result)=>{
@@ -42,8 +54,8 @@ e.preventDefault();
         })
     }
     return (
-        <div className="flex justify-center items-center flex-col-reverse lg:flex-row-reverse gap-12 p-2">
-            <div className="w-1/2">
+        <div className="flex justify-center items-center flex-col lg:flex-row-reverse md:gap-12 p-2">
+            <div className="md:w-1/2">
                 <Lottie animationData={registerlottie}></Lottie>
             </div>
             <div className="h-screen flex items-center flex-col justify-center lg:w-1/2 w-full">
@@ -60,8 +72,10 @@ e.preventDefault();
                         <input type="email" name="email" className="input w-full" placeholder="Email" />
                         
                         <label className="fieldset-label text-lg">Password</label>
-                        <div>
-                            <input type='password' name="password" className="input w-full" placeholder="Password" />
+                        <div className="relative">
+                            <input type={showpass?'text':'password'} name="password" className="input w-full" placeholder="Password" />
+                            <span onClick={()=>setshowpass(!showpass)} className="text-2xl absolute right-2 top-1/2 -translate-y-1/2 cursor-pointer">{showpass?<IoEye />:<IoEyeOff />}</span>
+                            {passerror && <p className="text-red-500 my-1">{passerror}</p>}
                         </div>
                         
                         <div><a className="link link-hover">Forgot password?</a></div>

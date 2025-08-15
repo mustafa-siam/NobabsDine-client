@@ -12,10 +12,8 @@ import Authprovider from './Providers/Authprovider.jsx';
 createRoot(document.getElementById('root')).render(
    <StrictMode>
     <HelmetProvider>
-      <Authprovider>
-        <CartProvider>
+      <Authprovider>    
           <RouterProvider router={router}></RouterProvider>
-        </CartProvider>
       </Authprovider>
     </HelmetProvider>
   </StrictMode>

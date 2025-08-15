@@ -1,15 +1,15 @@
-import React, { useContext } from 'react';
+import React from 'react';
 import Navbar from '../Shared components/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../Shared components/Footer';
 import { FaShoppingBag } from "react-icons/fa";
-import { CartContext } from '../Cartproveider/Cartcontext';
-import useAxiosInterceptor from '../Hooks/useAxiosInterceptor';
+import useCarts from '../Hooks/useCarts'; // Import your custom hook
+
 const Mainlayout = () => {
-    useAxiosInterceptor()
-    const { carts } = useContext(CartContext);
+    const [carts] = useCarts(); // Destructure the carts state from the hook
+
     const estimatedtotal = carts.reduce(
-        (sum, item) => sum + parseFloat(item.newtotalprice), 
+        (sum, item) => sum + parseFloat(item.newtotalprice),
         0
     );
 
@@ -18,12 +18,12 @@ const Mainlayout = () => {
             <NavLink to='/viewcart'>
                 <div className="flex flex-col justify-center items-center fixed right-4 top-1/2 transform -translate-y-1/2 bg-[#e9004b] text-white px-4 py-2 rounded shadow-lg text-lg z-50">
                     <FaShoppingBag className='text-2xl' />
-                    <p>{carts.length} items</p> 
+                    <p>{carts.length} items</p>
                     <p className='text-base bg-[#505B74] px-2 rounded-md'>
                         ${estimatedtotal.toFixed(2)}
                     </p>
                 </div>
-            </NavLink>          
+            </NavLink>
             <Navbar />
             <Outlet />
             <Footer />

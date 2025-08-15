@@ -3,10 +3,11 @@ import { useLoaderData } from "react-router-dom";
 import { authcontext } from "../../Providers/Authprovider";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
-import { CartContext } from "../../Cartproveider/Cartcontext";
 import { Helmet } from "react-helmet";
+import useCarts from "../../Hooks/useCarts";// Import the custom hook
+
 const Fooddetails = () => {
-    const { fetchCarts } = useContext(CartContext);
+    const [ , fetchCarts] = useCarts(); // Destructure only the fetchCarts function
     const food = useLoaderData();
     const { _id, name, image, category, price, quantity, chef, origin, description } = food;
     const [inputqty, setinputqty] = useState(1);
@@ -45,15 +46,15 @@ const Fooddetails = () => {
                 showConfirmButton: false,
                 timer: 2000
             });
-            fetchCarts();
+            fetchCarts(); // Call the refetch function from the custom hook
         }
     };
 
     return (
         <div className="flex flex-col md:flex-row justify-center gap-6 p-4">
-             <Helmet>
-                    <title>Food details | Nobabdine</title>
-                  </Helmet>
+            <Helmet>
+                <title>Food details | Nobabdine</title>
+            </Helmet>
             <div className="md:w-1/2">
                 <img src={image} alt={name} className="w-full h-[400px] rounded-md shadow-md" />
                 <h2 className="text-3xl font-bold pt-5 text-[#f97316]">{name}</h2>
@@ -67,7 +68,7 @@ const Fooddetails = () => {
                     <p><span className="font-semibold text-orange-600">Chef:</span> {chef}</p>
                     <p><span className="font-semibold text-orange-600">Price:</span> ${price}</p>
                     <p>
-                        <span className="font-semibold text-orange-600">Available Quantity:</span> 
+                        <span className="font-semibold text-orange-600">Available Quantity:</span>
                         <span className={quantity <= 0 ? "text-red-500 font-bold" : ""}>{quantity}</span>
                     </p>
                 </div>
@@ -84,8 +85,8 @@ const Fooddetails = () => {
                         max={quantity}
                         disabled={quantity <= 0}
                     />
-                    <button 
-                        onClick={handleaddtocart} 
+                    <button
+                        onClick={handleaddtocart}
                         className={`btn px-12 py-6 text-xl font-medium ${quantity <= 0 ? 'bg-gray-400 cursor-not-allowed' : 'bg-[#E9004B] text-white hover:text-[#E9004B] hover:bg-white hover:border-red-600'}`}
                         disabled={quantity <= 0}
                     >

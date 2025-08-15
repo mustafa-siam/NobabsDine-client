@@ -7,7 +7,7 @@ export const CartContext = createContext();
 export const CartProvider = ({ children }) => {
   const { user } = useContext(authcontext);
   const [carts, setCarts] = useState([]);
-  const axiosSecure = useAxiosSecure(); 
+  const axiosSecure = useAxiosSecure();
 
   const fetchCarts = async () => {
     if (user?.email) {
@@ -24,16 +24,10 @@ export const CartProvider = ({ children }) => {
 
   useEffect(() => {
     fetchCarts();
-  }, [user?.email, axiosSecure]); // Add axiosSecure to dependencies
-
-  const cartValue = {
-    carts,
-    setCarts,
-    fetchCarts,
-  };
+  }, [user?.email]); // ✅ no need to depend on axiosSecure
 
   return (
-    <CartContext.Provider value={cartValue}>
+    <CartContext.Provider value={{ carts, setCarts, fetchCarts }}>
       {children}
     </CartContext.Provider>
   );

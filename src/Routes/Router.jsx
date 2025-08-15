@@ -18,12 +18,14 @@ import Updatefood from "../Pages/Myfoods/Updatefood";
 import Foodgallery from "../Pages/Foodgallery/Foodgallery";
 import Userprofile from "../Pages/Userprofile/Userprofile";
 import Editprofile from "../Pages/Userprofile/Editprofile";
+import Errorpage from "../Pages/Errorpage/Errorpage";
 
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Mainlayout></Mainlayout>,
+    errorElement:<Errorpage></Errorpage>,
     children:[{
       path:"/",
       element:<Home></Home>,
@@ -35,7 +37,7 @@ const router = createBrowserRouter([
 {
   path:'/detailfood/:id',
   element:<Privateroute><Fooddetails></Fooddetails></Privateroute>,
-  loader:({params})=>fetch(`http://localhost:5000/allcuisin/${params.id}`)
+  loader:({params})=>fetch(`https://nobabs-dine-server.vercel.app/allcuisin/${params.id}`)
 },
 {
   path:'/viewcart',
@@ -64,7 +66,7 @@ element:<Register></Register>
 {
   path:'/updatefood/:id',
   element:<Updatefood></Updatefood>,
-   loader:({params})=>fetch(`http://localhost:5000/allcuisin/${params.id}`)
+   loader:({params})=>fetch(`https://nobabs-dine-server.vercel.app/allcuisin/${params.id}`)
 },
 {
   path:'/foodgallery',

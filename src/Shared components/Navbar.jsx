@@ -44,7 +44,7 @@ const Navbar = () => {
         {!user && (
           <>
             <Link to="/register" className="btn btn-link text-xl md:block hidden">Register</Link>
-            <Link to="/login"><FaUserAlt className="text-3xl" /></Link>
+            <Link to="/login" className='md:block hidden'><FaUserAlt className="text-3xl" /></Link>
             <Link to="/login" className="btn bg-[#3c65f5] text-white hover:bg-[#212529]">Sign In</Link>
           </>
         )}

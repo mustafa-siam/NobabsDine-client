@@ -59,7 +59,7 @@ const Review = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className='shadow-xl py-12 hover:border-b-4 hover:border-red-500 rounded-2xl bg-white'>
+            <div className='shadow-xl py-12 hover:border-b-4 hover:border-red-500 rounded-2xl'>
               <p className='py-6 md:px-14 text-center'>
                 “The food was not only tasty but beautifully presented. Each dish felt like a restaurant-quality experience brought right to my home. You can tell a lot of care and passion went into the preparation, and that makes all the difference.”
               </p>
@@ -78,7 +78,7 @@ const Review = () => {
           </SwiperSlide>
 
           <SwiperSlide>
-            <div className='shadow-xl py-12 hover:border-b-4 hover:border-red-500 rounded-2xl bg-white'>
+            <div className='shadow-xl py-12 hover:border-b-4 hover:border-red-500 rounded-2xl'>
               <p className='py-6 md:px-14 text-center'>
                 “From the first bite to the last, everything was perfect. The portion sizes were generous, the flavors were rich and satisfying, and the delivery was on time. This is exactly the kind of quality and service that keeps me coming back.”
               </p>
