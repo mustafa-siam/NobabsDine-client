@@ -3,7 +3,7 @@ import { authcontext } from "../Providers/Authprovider";
 import useAxiosSecure from "./UseAxiosSecure";
 
 const useCarts = () => {
-    const { user, loading } = useContext(authcontext); // Get loading state as well
+    const { user, loading } = useContext(authcontext);
     const [carts, setCarts] = useState([]);
     const axiosSecure = useAxiosSecure();
 
