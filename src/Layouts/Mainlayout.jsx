@@ -3,10 +3,10 @@ import Navbar from '../Shared components/Navbar';
 import { NavLink, Outlet } from 'react-router-dom';
 import Footer from '../Shared components/Footer';
 import { FaShoppingBag } from "react-icons/fa";
-import useCarts from '../Hooks/useCarts'; // Import your custom hook
+import useCarts from '../Hooks/useCarts';
 
 const Mainlayout = () => {
-    const [carts] = useCarts(); // Destructure the carts state from the hook
+    const [carts, fetchCarts] = useCarts();
 
     const estimatedtotal = carts.reduce(
         (sum, item) => sum + parseFloat(item.newtotalprice),
@@ -25,7 +25,7 @@ const Mainlayout = () => {
                 </div>
             </NavLink>
             <Navbar />
-            <Outlet />
+            <Outlet context={{ carts,fetchCarts }} />
             <Footer />
         </div>
     );

@@ -2,12 +2,13 @@ import React, { useContext } from 'react';
 import useAxiosSecure from '../../Hooks/UseAxiosSecure';
 import Swal from 'sweetalert2';
 import { authcontext } from '../../Providers/Authprovider';
-import { useNavigate } from 'react-router-dom';
-import useCarts from '../../Hooks/useCarts'; // Import your custom hook
+import { useNavigate, useOutletContext } from 'react-router-dom';
+ // Import your custom hook
 
 const Viewcart = () => {
     const { user } = useContext(authcontext);
-    const [carts, fetchCarts] = useCarts(); // Use the custom hook
+    const { carts, fetchCarts } = useOutletContext();
+
     const estimatedtotal = carts.reduce((sum, item) => sum + parseFloat(item.newtotalprice), 0);
     const axiosinstance = useAxiosSecure();
     const navigate = useNavigate();
@@ -28,7 +29,9 @@ const Viewcart = () => {
                     Swal.fire({
                         title: "Deleted!",
                         text: "Your item has been deleted.",
-                        icon: "success"
+                        icon: "success",
+                        showConfirmButton:false,
+                        timer:2000,
                     });
                     fetchCarts(); // Refetch the carts after deletion
                 }

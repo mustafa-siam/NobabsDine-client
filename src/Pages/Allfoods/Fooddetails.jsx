@@ -1,20 +1,29 @@
 import { useContext, useState } from "react";
-import { useLoaderData } from "react-router-dom";
+import { useLoaderData, useOutletContext } from "react-router-dom";
 import { authcontext } from "../../Providers/Authprovider";
 import useAxiosSecure from "../../Hooks/UseAxiosSecure";
 import Swal from "sweetalert2";
 import { Helmet } from "react-helmet";
-import useCarts from "../../Hooks/useCarts";// Import the custom hook
 
 const Fooddetails = () => {
-    const [ , fetchCarts] = useCarts(); // Destructure only the fetchCarts function
     const food = useLoaderData();
     const { _id, name, image, category, price, quantity, chef, origin, description } = food;
     const [inputqty, setinputqty] = useState(1);
     const { user } = useContext(authcontext);
     const axiosinstance = useAxiosSecure();
+    const { fetchCarts } = useOutletContext(); // get from Mainlayout
 
     const handleaddtocart = async () => {
+        if (!user) {
+            Swal.fire({
+                title: "Error!",
+                text: "You must be logged in to add items to your cart.",
+                icon: "error",
+                confirmButtonText: "OK"
+            });
+            return;
+        }
+
         if (inputqty > quantity || inputqty <= 0) {
             Swal.fire({
                 title: "Error!",
@@ -37,16 +46,27 @@ const Fooddetails = () => {
             inputqty,
         };
 
-        const res = await axiosinstance.post('carts', cartitem);
+        try {
+            const res = await axiosinstance.post('carts', cartitem);
 
-        if (res.data.insertedId) {
+            if (res.data.insertedId) {
+                Swal.fire({
+                    title: "Items Added In Cart",
+                    icon: "success",
+                    showConfirmButton: false,
+                    timer: 2000
+                });
+                fetchCarts(); // refresh cart data without reloading
+            }
+        } catch (err) {
+            console.error("Failed to add to cart:", err);
             Swal.fire({
-                title: "Items Added In Cart",
-                icon: "success",
-                showConfirmButton: false,
-                timer: 2000
+                title: "Error!",
+                text: "There was a problem adding the item to your cart.",
+                icon: "error",
+                showCancelButton:false,
+                timer:1000,
             });
-            fetchCarts(); // Call the refetch function from the custom hook
         }
     };
 
@@ -97,4 +117,5 @@ const Fooddetails = () => {
         </div>
     );
 };
+
 export default Fooddetails;
