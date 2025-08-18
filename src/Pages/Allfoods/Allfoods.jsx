@@ -7,19 +7,20 @@ import { Helmet } from 'react-helmet-async';
 const Allfoods = () => {
   const [allfoods, setallfoods] = useState([]);
   const [searchTerm, setSearchTerm] = useState("");
+  const [asc,setasc]=useState(true);
   const [page,setpage]=useState(1)
   const [totalpage,settotalpage]=useState(1)
   const limit=9;
   const axiosinstance = useAxiosSecure();
 
   useEffect(() => {
-    axiosinstance.get(`/allcuisin?search=${searchTerm}&page=${page}&limit${limit}`)
+    axiosinstance.get(`/allcuisin?search=${searchTerm}&page=${page}&limit=${limit}&asc=${asc ? "asc" : "desc"}`)
       .then(res => {
         setallfoods(res.data.foods);
         settotalpage(res.data.totalpage)
         console.log(res.data.totalpage)
       });
-  }, [axiosinstance,searchTerm,page]);
+  }, [axiosinstance,searchTerm,page,asc]);
 
 
   return (
@@ -27,7 +28,7 @@ const Allfoods = () => {
      <Helmet>
             <title>All Foods | Nobabdine</title>
           </Helmet>
-      <div className='flex justify-end pr-2'>
+      <div className='flex flex-col items-end justify-end pr-2 gap-6'>
         <label className="input flex items-center gap-2">
           <svg className="h-[1em] opacity-50" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
             <g strokeLinejoin="round" strokeLinecap="round" strokeWidth="2.5" fill="none" stroke="currentColor">
@@ -46,6 +47,12 @@ const Allfoods = () => {
             }}     
           />
         </label>
+        <div className="dropdown dropdown-bottom dropdown-center">
+  <div tabIndex={0} role="button" className="btn m-1 text-lg">Filter ⬇️</div>
+  <ul tabIndex={0} className="dropdown-content menu bg-base-100 rounded-box z-1 w-52 p-2 shadow-sm">
+    <li className='cursor-pointer' onClick={()=>setasc(!asc)}>{asc ? "Price Low to High" : "Price High to Low"}</li>
+  </ul>
+</div>
       </div>
 
       <div className='grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 p-2'>
